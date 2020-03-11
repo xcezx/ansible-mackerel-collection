@@ -5,7 +5,7 @@ readme: README.md
 authors:
 - xcezx <main.xcezx@gmail.com>
 
-description: The mackerel collection
+description: An Ansible collection for mackerel.
 license_file: LICENSE
 tags: []
 dependencies: {}
