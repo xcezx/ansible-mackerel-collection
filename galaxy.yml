@@ -1,0 +1,15 @@
+namespace: xcezx
+name: mackerel
+version: 0.1.0
+readme: README.md
+authors:
+- xcezx <main.xcezx@gmail.com>
+
+description: The mackerel collection
+license_file: LICENSE
+tags: []
+dependencies: {}
+repository: https://github.com/xcezx/ansible-mackerel-collection
+# documentation: http://docs.example.com
+homepage: https://github.com/xcezx/ansible-mackerel-collection
+issues: https://github.com/xcezx/ansible-mackerel-collection/issues
