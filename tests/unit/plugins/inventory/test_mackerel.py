@@ -12,5 +12,5 @@ def inventory():
     return InventoryModule()
 
 
-def verify_file_bad_config(inventory):
+def test_verify_file_bad_config(inventory):
     assert inventory.verify_file('not_mackerel_config.yml') is False
