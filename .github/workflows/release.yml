@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  release:
+    types: [create]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: ansible_collections/xcezx/mackerel
+      - name: Setup python 3.x
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.x
+      - name: Install dependencies
+        run: |
+          python -mpip install -U pip
+          pip install ansible
+      - name: Build and publish
+        env:
+          ANSIBLE_GALAXY_API_KEY: ${{ secrets.ANSIBLE_GALAXY_API_KEY }}
+        run: |
+          ansible-galaxy collection build
+          ansible-galaxy collection publish *.tar.gz --api-key $ANSIBLE_GALAXY_API_KEY
+        working-directory: ansible_collections/xcezx/mackerel
