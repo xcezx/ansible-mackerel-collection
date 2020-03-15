@@ -59,10 +59,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
     NAME = 'mackerel'
 
     def verify_file(self, path):
-        if super(InventoryModule, self).verify_file(path):
-            if path.endswith(('mackerel.yml', 'mackerel.yaml')):
-                return True
-        return False
+        return super(InventoryModule, self).verify_file(path) and path.endswith(('mackerel.yml', 'mackerel.yaml'))
 
     def parse(self, inventory, loader, path, cache=True):
         super(InventoryModule, self).parse(inventory, loader, path, cache)
