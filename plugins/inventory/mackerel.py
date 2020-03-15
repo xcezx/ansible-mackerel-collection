@@ -2,6 +2,13 @@ from __future__ import (absolute_import, division, print_function)
 
 __metaclass__ = type
 
+import json
+
+# noinspection PyUnresolvedReferences
+from ansible.module_utils.six.moves.urllib.parse import urlencode
+from ansible.module_utils.urls import open_url
+from ansible.plugins.inventory import BaseInventoryPlugin, Constructable, Cacheable
+
 DOCUMENTATION = '''
     name: mackerel
     plugin_type: inventory
@@ -47,13 +54,6 @@ compose:
     ansible_host: 'interfaces[0].ipAddress'
 '''
 
-import json
-
-# noinspection PyUnresolvedReferences
-from ansible.module_utils.six.moves.urllib.parse import urlencode
-from ansible.module_utils.urls import open_url
-from ansible.plugins.inventory import BaseInventoryPlugin, Constructable, Cacheable
-
 
 class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
     NAME = 'mackerel'
@@ -70,6 +70,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         if cache:
             cache = self.get_option('cache')
         cache_needs_update = False
+        source = None
         if cache:
             try:
                 source = self._cache[cache_key]
