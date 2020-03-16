@@ -2,9 +2,8 @@ from __future__ import (absolute_import, division, print_function)
 
 __metaclass__ = type
 
-import string
-
 import pytest
+
 from ansible.inventory.data import InventoryData
 from ansible.template import Templar
 # noinspection PyUnresolvedReferences
@@ -54,7 +53,7 @@ def test__populate(inventory, faker):
         'hosts': [
             {
                 'createdAt': faker.unix_time(),
-                'id': faker.lexify('???????????', letters=string.ascii_letters + string.digits),
+                'id': faker.bothify('#??#??#??#?'),
                 'name': 'db-master',
                 'interfaces': [
                     {'ipAddress': faker.ipv4_private()},
@@ -65,7 +64,7 @@ def test__populate(inventory, faker):
             },
             {
                 'createdAt': faker.unix_time(),
-                'id': faker.lexify('???????????', letters=string.ascii_letters + string.digits),
+                'id': faker.bothify('?#??#??#??#'),
                 'name': 'db-slave01',
                 'interfaces': [
                     {'ipAddress': faker.ipv4_private()},
@@ -76,7 +75,7 @@ def test__populate(inventory, faker):
             },
             {
                 'createdAt': faker.unix_time(),
-                'id': faker.lexify('???????????', letters=string.ascii_letters + string.digits),
+                'id': faker.bothify('??#??#??#??'),
                 'name': 'db-slave02',
                 'interfaces': [
                     {'ipAddress': faker.ipv4_private()},
