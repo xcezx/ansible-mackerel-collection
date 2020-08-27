@@ -7,24 +7,25 @@ on:
 
 jobs:
   sanity:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ['3.6', '3.7', '3.8']
+        ansible_version:
+          - stable-2.10
+        python_version:
+          - 3.8
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           path: ansible_collections/xcezx/mackerel
 
-      - name: Setup python ${{ matrix.python_version }}
-        uses: actions/setup-python@v1
+      - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python_version }}
 
       - name: Install ansible-base
-        run: pip install git+https://github.com/ansible-collection-migration/ansible-base.git --disable-pip-version-check
+        run: pip install git+https://github.com/ansible/ansible.git@${{ ansible_version }} --disable-pip-version-check
 
-      - name: Run sanity tests on python ${{ matrix.python_version }}
+      - name: Run sanity tests
         run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }}
-        working-directory: ansible_collections/xcezx/mackerel
+        working-directory: ./ansible_collections/xcezx/mackerel
