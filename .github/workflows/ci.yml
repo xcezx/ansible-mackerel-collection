@@ -24,7 +24,7 @@ jobs:
           python-version: ${{ matrix.python_version }}
 
       - name: Install ansible-base
-        run: pip install git+https://github.com/ansible/ansible.git@${{ ansible_version }} --disable-pip-version-check
+        run: pip install git+https://github.com/ansible/ansible.git@${{ matrix.ansible_version }} --disable-pip-version-check
 
       - name: Run sanity tests
         run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }}
