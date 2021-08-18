@@ -2,18 +2,22 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 
 jobs:
   sanity:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        ansible_version:
+        ansible:
           - stable-2.10
-        python_version:
+          - stable-2.11
+        python:
+          - 2.7
+          - 3.7
           - 3.8
-    runs-on: ubuntu-latest
+          - 3.9
     steps:
       - uses: actions/checkout@v2
         with:
@@ -21,11 +25,11 @@ jobs:
 
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python_version }}
+          python-version: ${{ matrix.python }}
 
-      - name: Install ansible-base
-        run: pip install git+https://github.com/ansible/ansible.git@${{ matrix.ansible_version }} --disable-pip-version-check
+      - name: Install ansible-base (${{matrix.ansible }})
+        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
 
       - name: Run sanity tests
-        run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }}
+        run: ansible-test sanity --docker -v --color --python ${{ matrix.python }}
         working-directory: ./ansible_collections/xcezx/mackerel
