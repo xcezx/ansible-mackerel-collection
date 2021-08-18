@@ -1,6 +1,6 @@
 # Ansible Collection - xcezx.mackerel
 
-![](https://github.com/xcezx/ansible-mackerel-collection/workflows/CI/badge.svg)
+[![CI](https://github.com/xcezx/ansible-mackerel-collection/actions/workflows/ci.yml/badge.svg)](https://github.com/xcezx/ansible-mackerel-collection/actions/workflows/ci.yml)
 
-An Ansible collcetion for [mackerel](https://mackerel.io).
+An Ansible collection for [mackerel](https://mackerel.io).
 
